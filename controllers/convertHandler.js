@@ -5,6 +5,8 @@
  *
  *
  */
+const input = require("../routes/api")
+
 function numberStringSplitter(input) {
   let number = input.match(/[.\d\/]+/g) || ["1"];
   let string = input.match(/[a-zA-Z]+/g)[0];
@@ -55,7 +57,7 @@ function ConvertHandler() {
   };
 
   this.getReturnUnit = function (initUnit) {
-    let unit = initUnit.toString().toLowerCase();
+    let unit = initUnit.toLowerCase();
 
     switch (unit) {
       case "km":
@@ -78,29 +80,29 @@ function ConvertHandler() {
   this.spellOutUnit = function (initUnit) {
     let unit = initUnit.toString().toLowerCase();
 
-    switch (unit) {
-      case "km":
-        return "kilometers";
-      case "gal":
-        return "gallons";
-      case "lbs":
-        return "pounds";
-      case "mi":
-        return "miles";
-      case "l":
-        return "liters";
-      case "kg":
-        return "kilograms";
-      default:
-        return "don't know";
+    if (unit === "km") { 
+      return "kilometers" 
+    }else if ( unit === "gal"){ 
+      return "gallons"
+    }else if (unit === "lbs"){ 
+      return "pounds"
+    }else if (unit === "mi"){ 
+      return "miles" 
+    }else if  (unit === "l"){ 
+      return "liter" 
+    }else if (unit === "kg"){ 
+      return "kilogram"
+    }else {
+      return "don't know"
     }
   };
 
-  this.convert = function (initNum, initUnit) {
+  this.convert = function (initNum ) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
-    let unit = initUnit.toString().toLowerCase();
+    let unit = _initUnit.toString().toLowerCase(); 
+    // initUnit.toString().toLowerCase();
     let result;
 
     switch (unit) {
@@ -138,4 +140,4 @@ function ConvertHandler() {
   };
 }
 
-module.exports = ConvertHandler;
+module.exports =  ConvertHandler;
